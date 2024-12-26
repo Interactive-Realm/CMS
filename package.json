@@ -1,0 +1,18 @@
+{
+  "name": "cms",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "npm run format --workspaces",
+    "lint": "npm run lint --workspaces",
+    "check": "npm run check --workspaces"
+  },
+  "workspaces": [
+    "./frontend",
+    "./backend"
+  ],
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "npm-run-all": "^4.1.5",
+    "vite": "^6.0.5"
+  }
+}
