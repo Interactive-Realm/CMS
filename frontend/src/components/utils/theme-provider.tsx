@@ -1,4 +1,4 @@
-import type { Theme } from "@/types/themeTypes"
+import type { Theme } from "@/types/settingsTypes"
 import { createContext, useContext, useEffect, useState } from "react"
 
 type ThemeProviderProps = {
@@ -22,7 +22,7 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
 export function ThemeProvider({
   children,
   defaultTheme = "system",
-  storageKey = "vite-ui-theme",
+  storageKey = "settings:theme",
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(

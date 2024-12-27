@@ -12,12 +12,19 @@ import { Key } from "../ui/key";
 import { useCommands } from "@/stores/commandPaletteStore";
 import { useNavigate } from "@tanstack/react-router";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { cn } from "@/lib/utils";
+import { Search } from "lucide-react";
 
-export function CommandPalette() {
+interface CommandPaletteProps {
+  className?: string;
+}
+
+export function CommandPalette({ className }: CommandPaletteProps) {
   const navigate = useNavigate();
   const commands = useCommands();
   const [open, setOpen] = useState(false);
   const [commandMenu, setCommandMenu] = useState("default");
+  const [commandMenuPlaceholder, setCommandMenuPlaceholder] = useState("Type a command or search...");
  
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -47,16 +54,19 @@ export function CommandPalette() {
  
   return (
     <>
-      <Button variant="search" size="sm" onClick={() => wrapSetOpen(true)} className="md:gap-16 lg:gap-20 w-full">
+      <Button variant="search" size="sm" onClick={() => wrapSetOpen(true)} className={cn("hidden lg:flex lg:gap-16 lg:gap-20 w-full", className)}>
         Search...
         <Key>
           <span className="text-xs">⌘</span>
           K
         </Key>
       </Button>
+      <Button variant="outline" size="icon" onClick={() => wrapSetOpen(true)} className={cn("lg:hidden rounded-full", className)}>
+        <Search />
+      </Button>
       <CommandDialog open={open} onOpenChange={wrapSetOpen}>
         <DialogTitle className="sr-only">Command palette</DialogTitle>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput placeholder={commandMenuPlaceholder} />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup>
@@ -73,6 +83,7 @@ export function CommandPalette() {
                 } else if (command.type === "submenu") {
                   console.log(`Change submenu ${command.submenu}`)
                   setCommandMenu(command.submenu);
+                  setCommandMenuPlaceholder(command.message);
                 }
               }}>
                 {command.title}

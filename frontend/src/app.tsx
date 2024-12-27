@@ -13,7 +13,7 @@ export default function App() {
   }, [auth]);
  
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="theme:mode">
+    <ThemeProvider>
       <RouterProvider router={router} context={{ auth }} />
     </ThemeProvider> 
   )

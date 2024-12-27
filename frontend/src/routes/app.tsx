@@ -3,7 +3,7 @@ import DashboardLayout from "@/components/layouts/dashboard";
 import { useTheme } from "@/components/utils/theme-provider";
 import { addCommands, addCommandsRecord, removeCommands, removeCommandsRecord } from "@/stores/commandPaletteStore";
 import type { Command } from "@/types/commandPaletteTypes";
-import { THEMES } from "@/types/themeTypes";
+import { THEMES } from "@/types/settingsTypes";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo } from "react";
 
@@ -79,15 +79,16 @@ function RouteComponent() {
     // Theme
     commands.default.push({
       type: "submenu",
-      title: "Change theme",
+      title: "Change Theme",
       icon: "settings",
-      submenu: "theme"
+      submenu: "theme",
+      message: "Select color mode"
     });
 
     for (const mode of THEMES) {
       commands.theme.push({
         type: "callback",
-        title: `Change theme to ${mode}`,
+        title: mode.charAt(0).toUpperCase() + mode.slice(1),
         callback: () => setTheme(mode)
       });
     };

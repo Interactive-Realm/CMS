@@ -18,6 +18,7 @@ export const CallbackCommandSchema = BaseCommandSchema.extend({
 
 export const SubMenuCommandSchema = BaseCommandSchema.extend({
   type: z.literal("submenu"),
+  message: z.string(),
   submenu: z.string()
 });
 
