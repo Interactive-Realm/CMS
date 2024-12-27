@@ -8,6 +8,7 @@ export type Game = z.infer<typeof GameSchema>;
 
 export const CampaignSchema = z.object({
   id: z.string(),
+  baseUrl: z.string(),
   title: z.string(),
   description: z.string().optional(),
   game: GameSchema,

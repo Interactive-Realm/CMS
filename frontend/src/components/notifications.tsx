@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import type { Notification } from "@/types/notificationTypes";
 import { Fragment } from "react/jsx-runtime";
+import { NotificationBadge } from "./ui/notification-badge";
 
 interface NotificationsProps {
   className?: string;
@@ -22,9 +23,10 @@ export function Notifications({ className }: NotificationsProps) {
   return (
     <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="icon" className={cn("rounded-full", className)}>
-            <Bell />
-          </Button>
+            <Button variant="outline" size="icon" className={cn("rounded-full relative", className)}>
+              <Bell />
+              <NotificationBadge visible={newNotifications} />
+            </Button>
         </DropdownMenuTrigger>
       <DropdownMenuContent
         className="w-[--radix-dropdown-menu-trigger-width] w-full max-w-80 rounded-lg"

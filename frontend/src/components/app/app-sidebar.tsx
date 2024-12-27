@@ -8,18 +8,13 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubItem,
+  SidebarMenuItem
 } from "@/components/ui/sidebar";
+import type { Campaign } from "@/types/dataTypes";
 import { Link } from "@tanstack/react-router";
-import { Gamepad, Home } from "lucide-react";
+import { Binoculars, ChartNoAxesColumn, ChartPie, Download, Home, List, Trophy, Users } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Logo } from "../brand/logo";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "../ui/collapsible";
 import { User } from "../user/user";
 
 const pages = [
@@ -31,37 +26,63 @@ const pages = [
   {
     title: "Campaigns",
     url: "/app/campaigns",
-    icon: Gamepad,
-  },
+    icon: List,
+  }
 ];
 
-const campaigns = [
+const campaigns: Campaign[] = [
   {
+    id: "1",
     title: "Christmas 2024",
-    url: "/app/campaigns/1",
-  },
-  {
-    title: "Birtday 2024",
-    url: "/app/campaigns/2",
-  },
+    baseUrl: "/app/campaign/1",
+    description: "Christmas is here.",
+    game: {
+      title: "Balloon Pop"
+    }
+  }
 ];
 
 const campaignSubPages = [
   {
     id: "overview",
     title: "Overview",
+    icon: Binoculars
   },
   {
-    id: "metrics",
-    title: "Metrics",
+    id: "traffic",
+    title: "Traffic",
+    icon: ChartNoAxesColumn
   },
   {
-    id: "settings",
-    title: "Settings",
+    id: "demographics",
+    title: "Demographics",
+    icon: ChartPie
+  },
+  {
+    id: "users",
+    title: "Users",
+    icon: Users
+  },
+  {
+    id: "rewards",
+    title: "Rewards",
+    icon: Trophy
+  },
+  {
+    id: "export",
+    title: "Export",
+    icon: Download
   },
 ];
 
 export default function AppSidebar() {
+  const [selectedCampaignIndex, setSelectedCampaignIndex] = useState(0);
+  const [selectedCampaign, setSelectedCampaign] = useState<Campaign | null>(null);
+
+  useEffect(() => {
+    setSelectedCampaign(campaigns[selectedCampaignIndex]);
+  }, [selectedCampaignIndex]);
+
   return (
     <Sidebar className="border-none p-5 pr-0" variant="floating">
       <SidebarHeader className="pt-4 flex items-center justify-center h-16 sm:h-20 mx-4 md:h-[6rem] border-b">
@@ -91,37 +112,26 @@ export default function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        <SidebarGroup>
-          <SidebarGroupLabel>Campaigns</SidebarGroupLabel>
-          <SidebarGroupContent>
+
+        {selectedCampaign && (
+          <SidebarGroup>
+            <SidebarGroupLabel>{selectedCampaign?.title}</SidebarGroupLabel>
+            <SidebarGroupContent>
             <SidebarMenu>
-              {campaigns.map((campaign) => (
-                <Collapsible key={campaign.url} className="group/collapsible">
-                  <SidebarMenuItem key={campaign.url}>
-                    <CollapsibleTrigger asChild>
-                      <SidebarMenuButton size="lg" asChild>
-                        <span>{campaign.title}</span>
-                      </SidebarMenuButton>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent>
-                      <SidebarMenuSub>
-                        {campaignSubPages.map((subPage) => (
-                          <SidebarMenuSubItem key={subPage.id}>
-                            <SidebarMenuButton size="lg" asChild>
-                              <Link to={`${campaign.url}/${subPage.id}`}>
-                                <span>{subPage.title}</span>
-                              </Link>
-                            </SidebarMenuButton>
-                          </SidebarMenuSubItem>
-                        ))}
-                      </SidebarMenuSub>
-                    </CollapsibleContent>
-                  </SidebarMenuItem>
-                </Collapsible>
+              {campaignSubPages.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton size="lg" asChild>
+                    <Link to={`${selectedCampaign.baseUrl}/${item.id}`}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
-        </SidebarGroup>
+          </SidebarGroup>
+        )}
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>

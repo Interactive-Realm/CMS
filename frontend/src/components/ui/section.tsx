@@ -1,20 +1,32 @@
-import * as React from "react";
-
 import { cn } from "@/lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
 
-const Section = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <section
-    ref={ref}
-    className={cn(
-      "rounded-lg border bg-card text-card-foreground shadow-sm",
-      className,
-    )}
-    {...props}
-  />
-));
+const sectionVariants = cva("", {
+  variants: {
+    variant: {
+      default: "",
+      outline: "rounded-lg border bg-card text-card-foreground shadow-sm",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+type SectionVariantProps = VariantProps<typeof sectionVariants>;
+
+export interface SectionProps extends React.ComponentPropsWithoutRef<"span">, SectionVariantProps {}
+
+function Section({ className, children, variant, ...props }: SectionProps) {
+  return (
+    <section
+      className={cn(sectionVariants({ variant, className }))}
+      {...props}
+    >
+      {children}
+    </section>
+  );
+}
+
 Section.displayName = "Section";
 
 export {

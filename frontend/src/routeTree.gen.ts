@@ -18,9 +18,13 @@ import { Route as AuthLogoutImport } from './routes/auth/logout'
 import { Route as AuthLoginImport } from './routes/auth/login'
 import { Route as AppSettingsImport } from './routes/app/settings'
 import { Route as AppHomeImport } from './routes/app/home'
-import { Route as AppCampaignsIndexImport } from './routes/app/campaigns/index'
-import { Route as AppCampaignsCampaignIdOverviewImport } from './routes/app/campaigns/$campaignId/overview'
-import { Route as AppCampaignsCampaignIdMetricsImport } from './routes/app/campaigns/$campaignId/metrics'
+import { Route as AppCampaignsImport } from './routes/app/campaigns'
+import { Route as AppCampaignCampaignIdUsersImport } from './routes/app/campaign/$campaignId/users'
+import { Route as AppCampaignCampaignIdTrafficImport } from './routes/app/campaign/$campaignId/traffic'
+import { Route as AppCampaignCampaignIdRewardsImport } from './routes/app/campaign/$campaignId/rewards'
+import { Route as AppCampaignCampaignIdOverviewImport } from './routes/app/campaign/$campaignId/overview'
+import { Route as AppCampaignCampaignIdExportImport } from './routes/app/campaign/$campaignId/export'
+import { Route as AppCampaignCampaignIdDemographicsImport } from './routes/app/campaign/$campaignId/demographics'
 
 // Create/Update Routes
 
@@ -66,23 +70,52 @@ const AppHomeRoute = AppHomeImport.update({
   getParentRoute: () => AppRoute,
 } as any)
 
-const AppCampaignsIndexRoute = AppCampaignsIndexImport.update({
-  id: '/campaigns/',
-  path: '/campaigns/',
+const AppCampaignsRoute = AppCampaignsImport.update({
+  id: '/campaigns',
+  path: '/campaigns',
   getParentRoute: () => AppRoute,
 } as any)
 
-const AppCampaignsCampaignIdOverviewRoute =
-  AppCampaignsCampaignIdOverviewImport.update({
-    id: '/campaigns/$campaignId/overview',
-    path: '/campaigns/$campaignId/overview',
+const AppCampaignCampaignIdUsersRoute = AppCampaignCampaignIdUsersImport.update(
+  {
+    id: '/campaign/$campaignId/users',
+    path: '/campaign/$campaignId/users',
+    getParentRoute: () => AppRoute,
+  } as any,
+)
+
+const AppCampaignCampaignIdTrafficRoute =
+  AppCampaignCampaignIdTrafficImport.update({
+    id: '/campaign/$campaignId/traffic',
+    path: '/campaign/$campaignId/traffic',
     getParentRoute: () => AppRoute,
   } as any)
 
-const AppCampaignsCampaignIdMetricsRoute =
-  AppCampaignsCampaignIdMetricsImport.update({
-    id: '/campaigns/$campaignId/metrics',
-    path: '/campaigns/$campaignId/metrics',
+const AppCampaignCampaignIdRewardsRoute =
+  AppCampaignCampaignIdRewardsImport.update({
+    id: '/campaign/$campaignId/rewards',
+    path: '/campaign/$campaignId/rewards',
+    getParentRoute: () => AppRoute,
+  } as any)
+
+const AppCampaignCampaignIdOverviewRoute =
+  AppCampaignCampaignIdOverviewImport.update({
+    id: '/campaign/$campaignId/overview',
+    path: '/campaign/$campaignId/overview',
+    getParentRoute: () => AppRoute,
+  } as any)
+
+const AppCampaignCampaignIdExportRoute =
+  AppCampaignCampaignIdExportImport.update({
+    id: '/campaign/$campaignId/export',
+    path: '/campaign/$campaignId/export',
+    getParentRoute: () => AppRoute,
+  } as any)
+
+const AppCampaignCampaignIdDemographicsRoute =
+  AppCampaignCampaignIdDemographicsImport.update({
+    id: '/campaign/$campaignId/demographics',
+    path: '/campaign/$campaignId/demographics',
     getParentRoute: () => AppRoute,
   } as any)
 
@@ -103,6 +136,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/app'
       preLoaderRoute: typeof AppImport
       parentRoute: typeof rootRoute
+    }
+    '/app/campaigns': {
+      id: '/app/campaigns'
+      path: '/campaigns'
+      fullPath: '/app/campaigns'
+      preLoaderRoute: typeof AppCampaignsImport
+      parentRoute: typeof AppImport
     }
     '/app/home': {
       id: '/app/home'
@@ -139,25 +179,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthResetpasswordImport
       parentRoute: typeof rootRoute
     }
-    '/app/campaigns/': {
-      id: '/app/campaigns/'
-      path: '/campaigns'
-      fullPath: '/app/campaigns'
-      preLoaderRoute: typeof AppCampaignsIndexImport
+    '/app/campaign/$campaignId/demographics': {
+      id: '/app/campaign/$campaignId/demographics'
+      path: '/campaign/$campaignId/demographics'
+      fullPath: '/app/campaign/$campaignId/demographics'
+      preLoaderRoute: typeof AppCampaignCampaignIdDemographicsImport
       parentRoute: typeof AppImport
     }
-    '/app/campaigns/$campaignId/metrics': {
-      id: '/app/campaigns/$campaignId/metrics'
-      path: '/campaigns/$campaignId/metrics'
-      fullPath: '/app/campaigns/$campaignId/metrics'
-      preLoaderRoute: typeof AppCampaignsCampaignIdMetricsImport
+    '/app/campaign/$campaignId/export': {
+      id: '/app/campaign/$campaignId/export'
+      path: '/campaign/$campaignId/export'
+      fullPath: '/app/campaign/$campaignId/export'
+      preLoaderRoute: typeof AppCampaignCampaignIdExportImport
       parentRoute: typeof AppImport
     }
-    '/app/campaigns/$campaignId/overview': {
-      id: '/app/campaigns/$campaignId/overview'
-      path: '/campaigns/$campaignId/overview'
-      fullPath: '/app/campaigns/$campaignId/overview'
-      preLoaderRoute: typeof AppCampaignsCampaignIdOverviewImport
+    '/app/campaign/$campaignId/overview': {
+      id: '/app/campaign/$campaignId/overview'
+      path: '/campaign/$campaignId/overview'
+      fullPath: '/app/campaign/$campaignId/overview'
+      preLoaderRoute: typeof AppCampaignCampaignIdOverviewImport
+      parentRoute: typeof AppImport
+    }
+    '/app/campaign/$campaignId/rewards': {
+      id: '/app/campaign/$campaignId/rewards'
+      path: '/campaign/$campaignId/rewards'
+      fullPath: '/app/campaign/$campaignId/rewards'
+      preLoaderRoute: typeof AppCampaignCampaignIdRewardsImport
+      parentRoute: typeof AppImport
+    }
+    '/app/campaign/$campaignId/traffic': {
+      id: '/app/campaign/$campaignId/traffic'
+      path: '/campaign/$campaignId/traffic'
+      fullPath: '/app/campaign/$campaignId/traffic'
+      preLoaderRoute: typeof AppCampaignCampaignIdTrafficImport
+      parentRoute: typeof AppImport
+    }
+    '/app/campaign/$campaignId/users': {
+      id: '/app/campaign/$campaignId/users'
+      path: '/campaign/$campaignId/users'
+      fullPath: '/app/campaign/$campaignId/users'
+      preLoaderRoute: typeof AppCampaignCampaignIdUsersImport
       parentRoute: typeof AppImport
     }
   }
@@ -166,19 +227,28 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface AppRouteChildren {
+  AppCampaignsRoute: typeof AppCampaignsRoute
   AppHomeRoute: typeof AppHomeRoute
   AppSettingsRoute: typeof AppSettingsRoute
-  AppCampaignsIndexRoute: typeof AppCampaignsIndexRoute
-  AppCampaignsCampaignIdMetricsRoute: typeof AppCampaignsCampaignIdMetricsRoute
-  AppCampaignsCampaignIdOverviewRoute: typeof AppCampaignsCampaignIdOverviewRoute
+  AppCampaignCampaignIdDemographicsRoute: typeof AppCampaignCampaignIdDemographicsRoute
+  AppCampaignCampaignIdExportRoute: typeof AppCampaignCampaignIdExportRoute
+  AppCampaignCampaignIdOverviewRoute: typeof AppCampaignCampaignIdOverviewRoute
+  AppCampaignCampaignIdRewardsRoute: typeof AppCampaignCampaignIdRewardsRoute
+  AppCampaignCampaignIdTrafficRoute: typeof AppCampaignCampaignIdTrafficRoute
+  AppCampaignCampaignIdUsersRoute: typeof AppCampaignCampaignIdUsersRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppCampaignsRoute: AppCampaignsRoute,
   AppHomeRoute: AppHomeRoute,
   AppSettingsRoute: AppSettingsRoute,
-  AppCampaignsIndexRoute: AppCampaignsIndexRoute,
-  AppCampaignsCampaignIdMetricsRoute: AppCampaignsCampaignIdMetricsRoute,
-  AppCampaignsCampaignIdOverviewRoute: AppCampaignsCampaignIdOverviewRoute,
+  AppCampaignCampaignIdDemographicsRoute:
+    AppCampaignCampaignIdDemographicsRoute,
+  AppCampaignCampaignIdExportRoute: AppCampaignCampaignIdExportRoute,
+  AppCampaignCampaignIdOverviewRoute: AppCampaignCampaignIdOverviewRoute,
+  AppCampaignCampaignIdRewardsRoute: AppCampaignCampaignIdRewardsRoute,
+  AppCampaignCampaignIdTrafficRoute: AppCampaignCampaignIdTrafficRoute,
+  AppCampaignCampaignIdUsersRoute: AppCampaignCampaignIdUsersRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
@@ -186,41 +256,53 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/app/campaigns': typeof AppCampaignsRoute
   '/app/home': typeof AppHomeRoute
   '/app/settings': typeof AppSettingsRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/logout': typeof AuthLogoutRoute
   '/auth/resetpassword': typeof AuthResetpasswordRoute
-  '/app/campaigns': typeof AppCampaignsIndexRoute
-  '/app/campaigns/$campaignId/metrics': typeof AppCampaignsCampaignIdMetricsRoute
-  '/app/campaigns/$campaignId/overview': typeof AppCampaignsCampaignIdOverviewRoute
+  '/app/campaign/$campaignId/demographics': typeof AppCampaignCampaignIdDemographicsRoute
+  '/app/campaign/$campaignId/export': typeof AppCampaignCampaignIdExportRoute
+  '/app/campaign/$campaignId/overview': typeof AppCampaignCampaignIdOverviewRoute
+  '/app/campaign/$campaignId/rewards': typeof AppCampaignCampaignIdRewardsRoute
+  '/app/campaign/$campaignId/traffic': typeof AppCampaignCampaignIdTrafficRoute
+  '/app/campaign/$campaignId/users': typeof AppCampaignCampaignIdUsersRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/app/campaigns': typeof AppCampaignsRoute
   '/app/home': typeof AppHomeRoute
   '/app/settings': typeof AppSettingsRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/logout': typeof AuthLogoutRoute
   '/auth/resetpassword': typeof AuthResetpasswordRoute
-  '/app/campaigns': typeof AppCampaignsIndexRoute
-  '/app/campaigns/$campaignId/metrics': typeof AppCampaignsCampaignIdMetricsRoute
-  '/app/campaigns/$campaignId/overview': typeof AppCampaignsCampaignIdOverviewRoute
+  '/app/campaign/$campaignId/demographics': typeof AppCampaignCampaignIdDemographicsRoute
+  '/app/campaign/$campaignId/export': typeof AppCampaignCampaignIdExportRoute
+  '/app/campaign/$campaignId/overview': typeof AppCampaignCampaignIdOverviewRoute
+  '/app/campaign/$campaignId/rewards': typeof AppCampaignCampaignIdRewardsRoute
+  '/app/campaign/$campaignId/traffic': typeof AppCampaignCampaignIdTrafficRoute
+  '/app/campaign/$campaignId/users': typeof AppCampaignCampaignIdUsersRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/app/campaigns': typeof AppCampaignsRoute
   '/app/home': typeof AppHomeRoute
   '/app/settings': typeof AppSettingsRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/logout': typeof AuthLogoutRoute
   '/auth/resetpassword': typeof AuthResetpasswordRoute
-  '/app/campaigns/': typeof AppCampaignsIndexRoute
-  '/app/campaigns/$campaignId/metrics': typeof AppCampaignsCampaignIdMetricsRoute
-  '/app/campaigns/$campaignId/overview': typeof AppCampaignsCampaignIdOverviewRoute
+  '/app/campaign/$campaignId/demographics': typeof AppCampaignCampaignIdDemographicsRoute
+  '/app/campaign/$campaignId/export': typeof AppCampaignCampaignIdExportRoute
+  '/app/campaign/$campaignId/overview': typeof AppCampaignCampaignIdOverviewRoute
+  '/app/campaign/$campaignId/rewards': typeof AppCampaignCampaignIdRewardsRoute
+  '/app/campaign/$campaignId/traffic': typeof AppCampaignCampaignIdTrafficRoute
+  '/app/campaign/$campaignId/users': typeof AppCampaignCampaignIdUsersRoute
 }
 
 export interface FileRouteTypes {
@@ -228,38 +310,50 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/app'
+    | '/app/campaigns'
     | '/app/home'
     | '/app/settings'
     | '/auth/login'
     | '/auth/logout'
     | '/auth/resetpassword'
-    | '/app/campaigns'
-    | '/app/campaigns/$campaignId/metrics'
-    | '/app/campaigns/$campaignId/overview'
+    | '/app/campaign/$campaignId/demographics'
+    | '/app/campaign/$campaignId/export'
+    | '/app/campaign/$campaignId/overview'
+    | '/app/campaign/$campaignId/rewards'
+    | '/app/campaign/$campaignId/traffic'
+    | '/app/campaign/$campaignId/users'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/app'
+    | '/app/campaigns'
     | '/app/home'
     | '/app/settings'
     | '/auth/login'
     | '/auth/logout'
     | '/auth/resetpassword'
-    | '/app/campaigns'
-    | '/app/campaigns/$campaignId/metrics'
-    | '/app/campaigns/$campaignId/overview'
+    | '/app/campaign/$campaignId/demographics'
+    | '/app/campaign/$campaignId/export'
+    | '/app/campaign/$campaignId/overview'
+    | '/app/campaign/$campaignId/rewards'
+    | '/app/campaign/$campaignId/traffic'
+    | '/app/campaign/$campaignId/users'
   id:
     | '__root__'
     | '/'
     | '/app'
+    | '/app/campaigns'
     | '/app/home'
     | '/app/settings'
     | '/auth/login'
     | '/auth/logout'
     | '/auth/resetpassword'
-    | '/app/campaigns/'
-    | '/app/campaigns/$campaignId/metrics'
-    | '/app/campaigns/$campaignId/overview'
+    | '/app/campaign/$campaignId/demographics'
+    | '/app/campaign/$campaignId/export'
+    | '/app/campaign/$campaignId/overview'
+    | '/app/campaign/$campaignId/rewards'
+    | '/app/campaign/$campaignId/traffic'
+    | '/app/campaign/$campaignId/users'
   fileRoutesById: FileRoutesById
 }
 
@@ -302,12 +396,20 @@ export const routeTree = rootRoute
     "/app": {
       "filePath": "app.tsx",
       "children": [
+        "/app/campaigns",
         "/app/home",
         "/app/settings",
-        "/app/campaigns/",
-        "/app/campaigns/$campaignId/metrics",
-        "/app/campaigns/$campaignId/overview"
+        "/app/campaign/$campaignId/demographics",
+        "/app/campaign/$campaignId/export",
+        "/app/campaign/$campaignId/overview",
+        "/app/campaign/$campaignId/rewards",
+        "/app/campaign/$campaignId/traffic",
+        "/app/campaign/$campaignId/users"
       ]
+    },
+    "/app/campaigns": {
+      "filePath": "app/campaigns.tsx",
+      "parent": "/app"
     },
     "/app/home": {
       "filePath": "app/home.tsx",
@@ -326,16 +428,28 @@ export const routeTree = rootRoute
     "/auth/resetpassword": {
       "filePath": "auth/resetpassword.tsx"
     },
-    "/app/campaigns/": {
-      "filePath": "app/campaigns/index.tsx",
+    "/app/campaign/$campaignId/demographics": {
+      "filePath": "app/campaign/$campaignId/demographics.tsx",
       "parent": "/app"
     },
-    "/app/campaigns/$campaignId/metrics": {
-      "filePath": "app/campaigns/$campaignId/metrics.tsx",
+    "/app/campaign/$campaignId/export": {
+      "filePath": "app/campaign/$campaignId/export.tsx",
       "parent": "/app"
     },
-    "/app/campaigns/$campaignId/overview": {
-      "filePath": "app/campaigns/$campaignId/overview.tsx",
+    "/app/campaign/$campaignId/overview": {
+      "filePath": "app/campaign/$campaignId/overview.tsx",
+      "parent": "/app"
+    },
+    "/app/campaign/$campaignId/rewards": {
+      "filePath": "app/campaign/$campaignId/rewards.tsx",
+      "parent": "/app"
+    },
+    "/app/campaign/$campaignId/traffic": {
+      "filePath": "app/campaign/$campaignId/traffic.tsx",
+      "parent": "/app"
+    },
+    "/app/campaign/$campaignId/users": {
+      "filePath": "app/campaign/$campaignId/users.tsx",
       "parent": "/app"
     }
   }

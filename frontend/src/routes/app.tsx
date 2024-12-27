@@ -67,12 +67,12 @@ function RouteComponent() {
       commands.default.push({
         type: "goto",
         title: `Go to ${campaign.title}`,
-        to: `/app/campaigns/${campaign.id}/overview`,
+        to: `/app/campaign/${campaign.id}/overview`,
       });
       commands.default.push({
         type: "goto",
         title: `Go to ${campaign.title} Metrics`,
-        to: `/app/campaigns/${campaign.id}/metrics`,
+        to: `/app/campaign/${campaign.id}/metrics`,
       });
     };
 
