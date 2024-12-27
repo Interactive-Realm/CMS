@@ -14,9 +14,9 @@ function RouteComponent() {
       breadcrumbs: [
         {
           title: "Home",
-          to: "/app/home"
-        }
-      ]
+          to: "/app/home",
+        },
+      ],
     });
   }, []);
 

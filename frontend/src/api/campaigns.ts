@@ -1,5 +1,5 @@
-import type { Campaign } from "@/types/data";
-import type { CampaignGraphMetricEntry } from "@/types/metrics";
+import type { Campaign } from "@/types/dataTypes";
+import type { CampaignGraphMetricEntry } from "@/types/metricTypes";
 
 export async function fetchCampaigns(): Promise<Campaign[]> {
   return [

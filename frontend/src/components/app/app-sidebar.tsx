@@ -13,16 +13,25 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { Link } from "@tanstack/react-router";
-import { Home } from "lucide-react";
+import { Gamepad, Home } from "lucide-react";
 import { Logo } from "../brand/logo";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "../ui/collapsible";
 import { User } from "../user/user";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
 
 const pages = [
   {
     title: "Home",
     url: "/app/home",
     icon: Home,
+  },
+  {
+    title: "Campaigns",
+    url: "/app/campaigns",
+    icon: Gamepad,
   },
 ];
 
@@ -40,17 +49,17 @@ const campaigns = [
 const campaignSubPages = [
   {
     id: "overview",
-    title: "Overview"
+    title: "Overview",
   },
   {
     id: "metrics",
-    title: "Metrics"
+    title: "Metrics",
   },
   {
     id: "settings",
-    title: "Settings"
-  }
-]
+    title: "Settings",
+  },
+];
 
 export default function AppSidebar() {
   return (

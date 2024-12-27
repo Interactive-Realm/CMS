@@ -1,8 +1,9 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
+import { useRouteMetadata } from "@/stores/routeStore";
 import { User } from "../user/user";
 import { AppBreadcrumbs } from "./app-breadcrumbs";
-import { useRouteMetadata } from "@/stores/routeStore";
+import { CommandPalette } from "../command-palette/command-palette";
 
 interface DashboardHeaderProps {
   className?: string;
@@ -25,6 +26,7 @@ export default function AppHeader({ className }: DashboardHeaderProps) {
         </p>
       </div>
       <div className="flex gap-3 items-center">
+        <CommandPalette />
         <SidebarTrigger className="rounded-full xl:hidden" />
         <User user={{ avatar: "", email: "alice@domain.dk", name: "Alice" }} />
       </div>

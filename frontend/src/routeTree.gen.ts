@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as AppImport } from './routes/app'
 import { Route as IndexImport } from './routes/index'
 import { Route as AuthResetpasswordImport } from './routes/auth/resetpassword'
+import { Route as AuthLogoutImport } from './routes/auth/logout'
 import { Route as AuthLoginImport } from './routes/auth/login'
 import { Route as AppSettingsImport } from './routes/app/settings'
 import { Route as AppHomeImport } from './routes/app/home'
@@ -38,6 +39,12 @@ const IndexRoute = IndexImport.update({
 const AuthResetpasswordRoute = AuthResetpasswordImport.update({
   id: '/auth/resetpassword',
   path: '/auth/resetpassword',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthLogoutRoute = AuthLogoutImport.update({
+  id: '/auth/logout',
+  path: '/auth/logout',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -118,6 +125,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginImport
       parentRoute: typeof rootRoute
     }
+    '/auth/logout': {
+      id: '/auth/logout'
+      path: '/auth/logout'
+      fullPath: '/auth/logout'
+      preLoaderRoute: typeof AuthLogoutImport
+      parentRoute: typeof rootRoute
+    }
     '/auth/resetpassword': {
       id: '/auth/resetpassword'
       path: '/auth/resetpassword'
@@ -175,6 +189,7 @@ export interface FileRoutesByFullPath {
   '/app/home': typeof AppHomeRoute
   '/app/settings': typeof AppSettingsRoute
   '/auth/login': typeof AuthLoginRoute
+  '/auth/logout': typeof AuthLogoutRoute
   '/auth/resetpassword': typeof AuthResetpasswordRoute
   '/app/campaigns': typeof AppCampaignsIndexRoute
   '/app/campaigns/$campaignId/metrics': typeof AppCampaignsCampaignIdMetricsRoute
@@ -187,6 +202,7 @@ export interface FileRoutesByTo {
   '/app/home': typeof AppHomeRoute
   '/app/settings': typeof AppSettingsRoute
   '/auth/login': typeof AuthLoginRoute
+  '/auth/logout': typeof AuthLogoutRoute
   '/auth/resetpassword': typeof AuthResetpasswordRoute
   '/app/campaigns': typeof AppCampaignsIndexRoute
   '/app/campaigns/$campaignId/metrics': typeof AppCampaignsCampaignIdMetricsRoute
@@ -200,6 +216,7 @@ export interface FileRoutesById {
   '/app/home': typeof AppHomeRoute
   '/app/settings': typeof AppSettingsRoute
   '/auth/login': typeof AuthLoginRoute
+  '/auth/logout': typeof AuthLogoutRoute
   '/auth/resetpassword': typeof AuthResetpasswordRoute
   '/app/campaigns/': typeof AppCampaignsIndexRoute
   '/app/campaigns/$campaignId/metrics': typeof AppCampaignsCampaignIdMetricsRoute
@@ -214,6 +231,7 @@ export interface FileRouteTypes {
     | '/app/home'
     | '/app/settings'
     | '/auth/login'
+    | '/auth/logout'
     | '/auth/resetpassword'
     | '/app/campaigns'
     | '/app/campaigns/$campaignId/metrics'
@@ -225,6 +243,7 @@ export interface FileRouteTypes {
     | '/app/home'
     | '/app/settings'
     | '/auth/login'
+    | '/auth/logout'
     | '/auth/resetpassword'
     | '/app/campaigns'
     | '/app/campaigns/$campaignId/metrics'
@@ -236,6 +255,7 @@ export interface FileRouteTypes {
     | '/app/home'
     | '/app/settings'
     | '/auth/login'
+    | '/auth/logout'
     | '/auth/resetpassword'
     | '/app/campaigns/'
     | '/app/campaigns/$campaignId/metrics'
@@ -247,6 +267,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
   AuthLoginRoute: typeof AuthLoginRoute
+  AuthLogoutRoute: typeof AuthLogoutRoute
   AuthResetpasswordRoute: typeof AuthResetpasswordRoute
 }
 
@@ -254,6 +275,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   AuthLoginRoute: AuthLoginRoute,
+  AuthLogoutRoute: AuthLogoutRoute,
   AuthResetpasswordRoute: AuthResetpasswordRoute,
 }
 
@@ -270,6 +292,7 @@ export const routeTree = rootRoute
         "/",
         "/app",
         "/auth/login",
+        "/auth/logout",
         "/auth/resetpassword"
       ]
     },
@@ -296,6 +319,9 @@ export const routeTree = rootRoute
     },
     "/auth/login": {
       "filePath": "auth/login.tsx"
+    },
+    "/auth/logout": {
+      "filePath": "auth/logout.tsx"
     },
     "/auth/resetpassword": {
       "filePath": "auth/resetpassword.tsx"

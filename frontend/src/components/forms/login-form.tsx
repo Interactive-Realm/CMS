@@ -36,6 +36,10 @@ export function LoginForm({ redirect, className, ...props }: LoginFormProps) {
 
   const form = useForm<LoginFormType>({
     resolver: zodResolver(FormSchema),
+    defaultValues: {
+      email: "",
+      password: ""
+    }
   });
 
   const handleSubmit = (values: LoginFormType) => {

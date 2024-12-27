@@ -2,6 +2,7 @@ import { useAuth } from "@/contexts/auth";
 import { RouterProvider } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { router } from "./router";
+import { ThemeProvider } from "./components/utils/theme-provider";
 
 export default function App() {
   const auth = useAuth();
@@ -10,6 +11,10 @@ export default function App() {
     console.log(auth);
     router.invalidate();
   }, [auth]);
-
-  return <RouterProvider router={router} context={{ auth }} />;
+ 
+  return (
+    <ThemeProvider defaultTheme="dark" storageKey="theme:mode">
+      <RouterProvider router={router} context={{ auth }} />
+    </ThemeProvider> 
+  )
 }

@@ -7,7 +7,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { useRouteMetadata } from "@/stores/routeStore";
-import type { Breadcrumb as BreadcrumbType } from "@/types/breadcrumb";
+import type { Breadcrumb as BreadcrumbType } from "@/types/breadcrumbTypes";
 import { Link } from "@tanstack/react-router";
 import { Fragment } from "react";
 
@@ -37,19 +37,20 @@ export function AppBreadcrumbs({ className }: AppBreadcrumbsProps) {
         ) : (
           <></>
         )}
-        {breadcrumbs.length > 1 && lastTwoCrumbs.map((crumb) => (
-          <Fragment key={crumb.to}>
-            <BreadcrumbSeparator>/</BreadcrumbSeparator>
-            <Crumb breadcrumb={crumb} />
-          </Fragment>
-        ))}
+        {breadcrumbs.length > 1 &&
+          lastTwoCrumbs.map((crumb) => (
+            <Fragment key={crumb.to}>
+              <BreadcrumbSeparator>/</BreadcrumbSeparator>
+              <Crumb breadcrumb={crumb} />
+            </Fragment>
+          ))}
       </BreadcrumbList>
     </Breadcrumb>
   );
 }
 
 interface CrumbProps {
-  breadcrumb: BreadcrumbType
+  breadcrumb: BreadcrumbType;
 }
 
 function Crumb({ breadcrumb }: CrumbProps) {

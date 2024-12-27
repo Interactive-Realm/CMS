@@ -1,6 +1,13 @@
-import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart";
+import {
+  type ChartConfig,
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
 import { cn } from "@/lib/utils";
-import type { CampaignGraphMetricEntry } from "@/types/metrics";
+import type { CampaignGraphMetricEntry } from "@/types/metricTypes";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 const chartConfig = {
@@ -17,7 +24,10 @@ interface PlaysChartProps {
 
 export function PlaysChart({ data, className }: PlaysChartProps) {
   return (
-    <ChartContainer config={chartConfig} className={cn("min-h-[200px] w-full", className)}>
+    <ChartContainer
+      config={chartConfig}
+      className={cn("min-h-[200px] w-full", className)}
+    >
       <BarChart accessibilityLayer data={data}>
         <CartesianGrid vertical={false} />
         <XAxis

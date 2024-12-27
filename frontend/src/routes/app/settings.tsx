@@ -14,13 +14,13 @@ function RouteComponent() {
       breadcrumbs: [
         {
           title: "Home",
-          to: "/app/home"
+          to: "/app/home",
         },
         {
           title: "Settings",
-          to: "/app/settings"
+          to: "/app/settings",
         },
-      ]
+      ],
     });
   }, []);
 

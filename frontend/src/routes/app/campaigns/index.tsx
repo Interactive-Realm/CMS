@@ -16,9 +16,9 @@ function RouteComponent() {
       breadcrumbs: [
         {
           title: "Campaigns",
-          to: "/app/campaigns"
-        }
-      ]
+          to: "/app/campaigns",
+        },
+      ],
     });
   }, []);
 
