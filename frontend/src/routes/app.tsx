@@ -66,13 +66,8 @@ function RouteComponent() {
     for (const campaign of campaigns) {
       commands.default.push({
         type: "goto",
-        title: `Go to ${campaign.title}`,
+        title: `Go to campaign: ${campaign.title}`,
         to: `/app/campaign/${campaign.id}/overview`,
-      });
-      commands.default.push({
-        type: "goto",
-        title: `Go to ${campaign.title} Metrics`,
-        to: `/app/campaign/${campaign.id}/metrics`,
       });
     };
 
