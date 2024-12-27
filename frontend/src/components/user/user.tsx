@@ -14,6 +14,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { Link } from "@tanstack/react-router";
 import {
   BadgeCheck,
   Bell,
@@ -25,7 +26,6 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Button } from "../ui/button";
-import { Link } from "@tanstack/react-router";
 
 interface UserProps {
   user: {
@@ -41,7 +41,7 @@ export function User({ user, variant = "button" }: UserProps) {
 
   const logOut = () => {
     console.log("Log out");
-  }
+  };
 
   return (
     <SidebarMenu>
@@ -52,7 +52,9 @@ export function User({ user, variant = "button" }: UserProps) {
               <Button variant="ghost" size="icon" className="rounded-full">
                 <Avatar>
                   <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback>{user.name.slice(0, 2).toUpperCase()}</AvatarFallback>
+                  <AvatarFallback>
+                    {user.name.slice(0, 2).toUpperCase()}
+                  </AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
@@ -62,10 +64,12 @@ export function User({ user, variant = "button" }: UserProps) {
               <SidebarMenuButton
                 size="lg"
                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-                >
+              >
                 <Avatar className="h-8 w-8">
                   <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback>{user.name.slice(0, 2).toUpperCase()}</AvatarFallback>
+                  <AvatarFallback>
+                    {user.name.slice(0, 2).toUpperCase()}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{user.name}</span>
@@ -96,7 +100,7 @@ export function User({ user, variant = "button" }: UserProps) {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-                <Link to="/settings">
+                <Link to="/app/settings">
                   <Settings />
                   Settings
                 </Link>

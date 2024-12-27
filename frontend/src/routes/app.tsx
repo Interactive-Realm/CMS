@@ -1,7 +1,7 @@
 import DashboardLayout from "@/components/layouts/dashboard";
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_app")({
+export const Route = createFileRoute("/app")({
   component: () => (
     <DashboardLayout>
       <Outlet />
@@ -18,4 +18,5 @@ export const Route = createFileRoute("/_app")({
       // })
     }
   },
+  notFoundComponent: () => <div>Hey</div>,
 });

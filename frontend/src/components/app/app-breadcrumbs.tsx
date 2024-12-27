@@ -6,26 +6,30 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Link, useNavigate } from "@tanstack/react-router";
-import { Fragment, useState } from "react";
+import { useRouteMetadata } from "@/stores/routeStore";
+import type { Breadcrumb as BreadcrumbType } from "@/types/breadcrumb";
+import { Link } from "@tanstack/react-router";
+import { Fragment } from "react";
 
 interface AppBreadcrumbsProps {
   className?: string;
 }
 
 export function AppBreadcrumbs({ className }: AppBreadcrumbsProps) {
-  const [crumbs, setCrumbs] = useState([{ path: "/home" }]);
-  const lastTwoCrumbs = crumbs.slice(-2);
+  const { breadcrumbs } = useRouteMetadata();
+  const lastTwoCrumbs = breadcrumbs.slice(breadcrumbs.length === 2 ? -1 : -2);
 
   return (
     <Breadcrumb className={className}>
       <BreadcrumbList>
-        <BreadcrumbItem>
-          <Crumb route="Home" />
-        </BreadcrumbItem>
-        {crumbs.length > 2 ? (
+        {breadcrumbs.length > 0 && (
+          <BreadcrumbItem>
+            <Crumb breadcrumb={breadcrumbs[0]} />
+          </BreadcrumbItem>
+        )}
+        {breadcrumbs.length > 3 ? (
           <>
-            <BreadcrumbSeparator />
+            <BreadcrumbSeparator>/</BreadcrumbSeparator>
             <BreadcrumbItem>
               <BreadcrumbEllipsis />
             </BreadcrumbItem>
@@ -33,10 +37,10 @@ export function AppBreadcrumbs({ className }: AppBreadcrumbsProps) {
         ) : (
           <></>
         )}
-        {lastTwoCrumbs.map((crumb) => (
-          <Fragment key={crumb.path}>
-            <BreadcrumbSeparator />
-            <Crumb route={crumb.path} />
+        {breadcrumbs.length > 1 && lastTwoCrumbs.map((crumb) => (
+          <Fragment key={crumb.to}>
+            <BreadcrumbSeparator>/</BreadcrumbSeparator>
+            <Crumb breadcrumb={crumb} />
           </Fragment>
         ))}
       </BreadcrumbList>
@@ -45,14 +49,14 @@ export function AppBreadcrumbs({ className }: AppBreadcrumbsProps) {
 }
 
 interface CrumbProps {
-  route: string;
+  breadcrumb: BreadcrumbType
 }
 
-function Crumb({ route }: CrumbProps) {
+function Crumb({ breadcrumb }: CrumbProps) {
   return (
     <BreadcrumbItem>
       <BreadcrumbLink asChild>
-        <Link to={route}>{route}</Link>
+        <Link to={breadcrumb.to}>{breadcrumb.title}</Link>
       </BreadcrumbLink>
     </BreadcrumbItem>
   );

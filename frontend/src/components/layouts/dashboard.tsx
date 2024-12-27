@@ -12,9 +12,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <AppHeader title="Home" className="md:mt-5" />
+        <AppHeader className="md:mt-3 md:mb-2" />
         <main id="main" className="flex flex-1 flex-col gap-4 px-6">
-          <div className="flex-1 rounded-xl md:min-h-min">{children}</div>
+          <div className="flex-1 rounded-xl md:min-h-min flex flex-col gap-4">{children}</div>
         </main>
       </SidebarInset>
     </SidebarProvider>
