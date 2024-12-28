@@ -1,5 +1,5 @@
-import { fetchCampaigns } from '@/api/campaigns'
-import { updateRouteMetadata } from '@/stores/routeStore'
+import { fetchCampaigns } from '@/lib/api/campaigns'
+import { updateRouteMetadata } from '@/lib/stores/routeStore'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect } from 'react'
 

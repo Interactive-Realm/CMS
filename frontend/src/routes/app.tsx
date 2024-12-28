@@ -1,9 +1,9 @@
-import { fetchCampaigns } from "@/api/campaigns";
-import DashboardLayout from "@/components/layouts/dashboard";
-import { useTheme } from "@/components/utils/theme-provider";
-import { addCommands, addCommandsRecord, removeCommands, removeCommandsRecord } from "@/stores/commandPaletteStore";
-import type { Command } from "@/types/commandPaletteTypes";
-import { THEMES } from "@/types/settingsTypes";
+import { fetchCampaigns } from "@/lib/api/campaigns";
+import DashboardLayout from "@/lib/components/layouts/dashboard";
+import { useTheme } from "@/lib/components/utils/theme-provider";
+import { addCommands, addCommandsRecord, removeCommands, removeCommandsRecord } from "@/lib/stores/commandPaletteStore";
+import type { Command } from "@/lib/types/commandPaletteTypes";
+import { THEMES } from "@/lib/types/settingsTypes";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo } from "react";
 

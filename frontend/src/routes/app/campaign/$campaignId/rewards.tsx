@@ -1,7 +1,7 @@
-import { fetchCampaign, fetchCampaignMetrics } from '@/api/campaigns'
-import { PlaysChart } from '@/components/plays-chart'
-import { Section } from '@/components/ui/section'
-import { updateRouteMetadata } from '@/stores/routeStore'
+import { fetchCampaign, fetchCampaignMetrics } from '@/lib/api/campaigns'
+import { PlaysChart } from '@/lib/components/plays-chart'
+import { Section } from '@/lib/components/ui/section'
+import { updateRouteMetadata } from '@/lib/stores/routeStore'
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect } from 'react'
 

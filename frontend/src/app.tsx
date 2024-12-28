@@ -1,8 +1,8 @@
-import { useAuth } from "@/contexts/auth";
+import { useAuth } from "@/lib/contexts/auth";
 import { RouterProvider } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { router } from "./router";
-import { ThemeProvider } from "./components/utils/theme-provider";
+import { ThemeProvider } from "./lib/components/utils/theme-provider";
 
 export default function App() {
   const auth = useAuth();

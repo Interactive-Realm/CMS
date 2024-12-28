@@ -1,5 +1,5 @@
-import { Logo } from "@/components/brand/logo";
-import { LoginForm } from "@/components/forms/login-form";
+import { Logo } from "@/lib/components/brand/logo";
+import { LoginForm } from "@/lib/components/forms/login-form";
 import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { fallback, zodValidator } from "@tanstack/zod-adapter";
 import { z } from "zod";

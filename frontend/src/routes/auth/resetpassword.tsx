@@ -1,5 +1,5 @@
-import { Logo } from "@/components/brand/logo";
-import { ResetPasswordForm } from "@/components/forms/reset-password-form";
+import { Logo } from "@/lib/components/brand/logo";
+import { ResetPasswordForm } from "@/lib/components/forms/reset-password-form";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/auth/resetpassword")({
