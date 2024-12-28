@@ -16,7 +16,6 @@ import { Route as IndexImport } from './routes/index'
 import { Route as AuthResetpasswordImport } from './routes/auth/resetpassword'
 import { Route as AuthLogoutImport } from './routes/auth/logout'
 import { Route as AuthLoginImport } from './routes/auth/login'
-import { Route as AppSettingsImport } from './routes/app/settings'
 import { Route as AppHomeImport } from './routes/app/home'
 import { Route as AppCampaignsImport } from './routes/app/campaigns'
 import { Route as AppCampaignCampaignIdUsersImport } from './routes/app/campaign/$campaignId/users'
@@ -56,12 +55,6 @@ const AuthLoginRoute = AuthLoginImport.update({
   id: '/auth/login',
   path: '/auth/login',
   getParentRoute: () => rootRoute,
-} as any)
-
-const AppSettingsRoute = AppSettingsImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => AppRoute,
 } as any)
 
 const AppHomeRoute = AppHomeImport.update({
@@ -151,13 +144,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppHomeImport
       parentRoute: typeof AppImport
     }
-    '/app/settings': {
-      id: '/app/settings'
-      path: '/settings'
-      fullPath: '/app/settings'
-      preLoaderRoute: typeof AppSettingsImport
-      parentRoute: typeof AppImport
-    }
     '/auth/login': {
       id: '/auth/login'
       path: '/auth/login'
@@ -229,7 +215,6 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppCampaignsRoute: typeof AppCampaignsRoute
   AppHomeRoute: typeof AppHomeRoute
-  AppSettingsRoute: typeof AppSettingsRoute
   AppCampaignCampaignIdDemographicsRoute: typeof AppCampaignCampaignIdDemographicsRoute
   AppCampaignCampaignIdExportRoute: typeof AppCampaignCampaignIdExportRoute
   AppCampaignCampaignIdOverviewRoute: typeof AppCampaignCampaignIdOverviewRoute
@@ -241,7 +226,6 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppCampaignsRoute: AppCampaignsRoute,
   AppHomeRoute: AppHomeRoute,
-  AppSettingsRoute: AppSettingsRoute,
   AppCampaignCampaignIdDemographicsRoute:
     AppCampaignCampaignIdDemographicsRoute,
   AppCampaignCampaignIdExportRoute: AppCampaignCampaignIdExportRoute,
@@ -258,7 +242,6 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRouteWithChildren
   '/app/campaigns': typeof AppCampaignsRoute
   '/app/home': typeof AppHomeRoute
-  '/app/settings': typeof AppSettingsRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/logout': typeof AuthLogoutRoute
   '/auth/resetpassword': typeof AuthResetpasswordRoute
@@ -275,7 +258,6 @@ export interface FileRoutesByTo {
   '/app': typeof AppRouteWithChildren
   '/app/campaigns': typeof AppCampaignsRoute
   '/app/home': typeof AppHomeRoute
-  '/app/settings': typeof AppSettingsRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/logout': typeof AuthLogoutRoute
   '/auth/resetpassword': typeof AuthResetpasswordRoute
@@ -293,7 +275,6 @@ export interface FileRoutesById {
   '/app': typeof AppRouteWithChildren
   '/app/campaigns': typeof AppCampaignsRoute
   '/app/home': typeof AppHomeRoute
-  '/app/settings': typeof AppSettingsRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/logout': typeof AuthLogoutRoute
   '/auth/resetpassword': typeof AuthResetpasswordRoute
@@ -312,7 +293,6 @@ export interface FileRouteTypes {
     | '/app'
     | '/app/campaigns'
     | '/app/home'
-    | '/app/settings'
     | '/auth/login'
     | '/auth/logout'
     | '/auth/resetpassword'
@@ -328,7 +308,6 @@ export interface FileRouteTypes {
     | '/app'
     | '/app/campaigns'
     | '/app/home'
-    | '/app/settings'
     | '/auth/login'
     | '/auth/logout'
     | '/auth/resetpassword'
@@ -344,7 +323,6 @@ export interface FileRouteTypes {
     | '/app'
     | '/app/campaigns'
     | '/app/home'
-    | '/app/settings'
     | '/auth/login'
     | '/auth/logout'
     | '/auth/resetpassword'
@@ -398,7 +376,6 @@ export const routeTree = rootRoute
       "children": [
         "/app/campaigns",
         "/app/home",
-        "/app/settings",
         "/app/campaign/$campaignId/demographics",
         "/app/campaign/$campaignId/export",
         "/app/campaign/$campaignId/overview",
@@ -413,10 +390,6 @@ export const routeTree = rootRoute
     },
     "/app/home": {
       "filePath": "app/home.tsx",
-      "parent": "/app"
-    },
-    "/app/settings": {
-      "filePath": "app/settings.tsx",
       "parent": "/app"
     },
     "/auth/login": {

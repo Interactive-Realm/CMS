@@ -112,7 +112,6 @@ export default function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-
         {selectedCampaign && (
           <SidebarGroup>
             <SidebarGroupLabel>{selectedCampaign?.title}</SidebarGroupLabel>

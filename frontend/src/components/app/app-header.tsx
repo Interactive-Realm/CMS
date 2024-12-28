@@ -13,10 +13,12 @@ interface DashboardHeaderProps {
 export default function AppHeader({ className }: DashboardHeaderProps) {
   const { title } = useRouteMetadata();
 
+  // md:px-14
+
   return (
     <header
       className={cn(
-        "px-6 h-16 sm:h-20 md:h-[6rem] md:px-14 items-center justify-between transition-all",
+        "px-6 h-16 sm:h-20 md:h-[6rem] items-center justify-between transition-all",
         className,
       )}
     >
