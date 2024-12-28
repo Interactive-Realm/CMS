@@ -1,8 +1,8 @@
 import AppHeader from "@/lib/components/app/app-header";
 import AppSidebar from "@/lib/components/app/app-sidebar";
 import type { ReactNode } from "react";
-import { SidebarInset, SidebarProvider } from "../ui/sidebar";
 import { CommandPalette } from "../command-palette/command-palette";
+import { SidebarInset, SidebarProvider } from "../ui/sidebar";
 
 interface DashboardLayoutProps {
   children: ReactNode;

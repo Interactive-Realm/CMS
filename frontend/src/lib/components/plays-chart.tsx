@@ -4,8 +4,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/lib/components/ui/chart";
-import { cn } from "@/lib/utils/shadcn";
 import type { CampaignGraphMetricEntry } from "@/lib/types/metricTypes";
+import { cn } from "@/lib/utils/shadcn";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 const chartConfig = {

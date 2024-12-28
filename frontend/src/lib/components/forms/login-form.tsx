@@ -38,8 +38,8 @@ export function LoginForm({ redirect, className, ...props }: LoginFormProps) {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       email: "",
-      password: ""
-    }
+      password: "",
+    },
   });
 
   const handleSubmit = (values: LoginFormType) => {

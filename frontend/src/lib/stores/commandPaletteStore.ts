@@ -7,7 +7,7 @@ type CommandPaletteStore = {
 
 const commandPaletteStore = new Store<CommandPaletteStore>({
   commands: {
-    default: []
+    default: [],
   },
 });
 
@@ -19,21 +19,25 @@ export function addCommandsRecord(newCommands: Record<string, Command[]>) {
     }
 
     return {
-      commands: result
+      commands: result,
     };
   });
 }
 
-export function removeCommandsRecord(commandsToRemove: Record<string, Command[]>) {
+export function removeCommandsRecord(
+  commandsToRemove: Record<string, Command[]>,
+) {
   commandPaletteStore.setState(({ commands }) => {
     const result: Record<string, Command[]> = {};
     for (const [menu, cmds] of Object.entries(commands)) {
-      const commandIds = commandsToRemove[menu].map(command => command.title);
-      result[menu] = cmds.filter((command) => !commandIds.includes(command.title));
+      const commandIds = commandsToRemove[menu].map((command) => command.title);
+      result[menu] = cmds.filter(
+        (command) => !commandIds.includes(command.title),
+      );
     }
 
     return {
-      commands: result
+      commands: result,
     };
   });
 }
@@ -42,17 +46,19 @@ export function addCommands(newCommands: Command[], menu = "default") {
   commandPaletteStore.setState(({ commands }) => {
     commands[menu] = [...commands[menu], ...newCommands];
     return {
-      commands
+      commands,
     };
   });
 }
 
 export function removeCommands(commandsToRemove: Command[], menu = "default") {
-  const commandIds = commandsToRemove.map(command => command.title);
+  const commandIds = commandsToRemove.map((command) => command.title);
   commandPaletteStore.setState(({ commands }) => {
-    commands[menu] = commands[menu].filter((command) => !commandIds.includes(command.title))
+    commands[menu] = commands[menu].filter(
+      (command) => !commandIds.includes(command.title),
+    );
     return {
-      commands
+      commands,
     };
   });
 }

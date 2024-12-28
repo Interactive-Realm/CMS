@@ -1,7 +1,10 @@
 import { fetchCampaigns } from "@/lib/api/campaigns";
 import DashboardLayout from "@/lib/components/layouts/dashboard";
 import { useTheme } from "@/lib/components/utils/theme-provider";
-import { addCommands, addCommandsRecord, removeCommands, removeCommandsRecord } from "@/lib/stores/commandPaletteStore";
+import {
+  addCommandsRecord,
+  removeCommandsRecord,
+} from "@/lib/stores/commandPaletteStore";
 import type { Command } from "@/lib/types/commandPaletteTypes";
 import { THEMES } from "@/lib/types/settingsTypes";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
@@ -11,8 +14,8 @@ export const Route = createFileRoute("/app")({
   component: RouteComponent,
   loader: async () => {
     return {
-      campaigns: await fetchCampaigns()
-    }
+      campaigns: await fetchCampaigns(),
+    };
   },
   beforeLoad: ({ context, location }) => {
     const { isAuthenticated } = context.auth;
@@ -42,25 +45,25 @@ function RouteComponent() {
       type: "goto",
       title: "Go to Home",
       icon: "home",
-      to: "/app/home"
+      to: "/app/home",
     });
     commands.default.push({
       type: "goto",
       title: "Go to Campaigns",
       icon: "home",
-      to: "/app/campaigns"
+      to: "/app/campaigns",
     });
     commands.default.push({
       type: "goto",
       title: "Go to Settings",
       icon: "settings",
-      to: "/app/settings"
+      to: "/app/settings",
     });
     commands.default.push({
       type: "goto",
       title: "Sign Out",
       icon: "settings",
-      to: "/auth/logout"
+      to: "/auth/logout",
     });
 
     for (const campaign of campaigns) {
@@ -69,7 +72,7 @@ function RouteComponent() {
         title: `Go to campaign: ${campaign.title}`,
         to: `/app/campaign/${campaign.id}/overview`,
       });
-    };
+    }
 
     // Theme
     commands.default.push({
@@ -77,16 +80,16 @@ function RouteComponent() {
       title: "Change Theme",
       icon: "settings",
       submenu: "theme",
-      message: "Select color mode"
+      message: "Select color mode",
     });
 
     for (const mode of THEMES) {
       commands.theme.push({
         type: "callback",
         title: mode.charAt(0).toUpperCase() + mode.slice(1),
-        callback: () => setTheme(mode)
+        callback: () => setTheme(mode),
       });
-    };
+    }
 
     return commands;
   }, [campaigns, setTheme]);
@@ -94,7 +97,7 @@ function RouteComponent() {
   useEffect(() => {
     addCommandsRecord(commands);
     return () => removeCommandsRecord(commands);
-  }, [commands])
+  }, [commands]);
 
   return (
     <DashboardLayout>

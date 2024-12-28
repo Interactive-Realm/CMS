@@ -4,7 +4,7 @@
 	"files": {
 		"ignore": [
 			"src/*.gen.ts",
-			"src/components/ui"
+			"src/lib/components/ui"
 		]
 	}
 }

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils/shadcn";
-import { cva, type VariantProps } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 
 const sectionVariants = cva("", {
   variants: {
@@ -14,14 +14,13 @@ const sectionVariants = cva("", {
 });
 type SectionVariantProps = VariantProps<typeof sectionVariants>;
 
-export interface SectionProps extends React.ComponentPropsWithoutRef<"span">, SectionVariantProps {}
+export interface SectionProps
+  extends React.ComponentPropsWithoutRef<"span">,
+    SectionVariantProps {}
 
 function Section({ className, children, variant, ...props }: SectionProps) {
   return (
-    <section
-      className={cn(sectionVariants({ variant, className }))}
-      {...props}
-    >
+    <section className={cn(sectionVariants({ variant, className }))} {...props}>
       {children}
     </section>
   );
@@ -29,6 +28,4 @@ function Section({ className, children, variant, ...props }: SectionProps) {
 
 Section.displayName = "Section";
 
-export {
-    Section
-}
+export { Section };

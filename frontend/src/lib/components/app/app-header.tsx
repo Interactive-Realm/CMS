@@ -1,10 +1,10 @@
 import { SidebarTrigger } from "@/lib/components/ui/sidebar";
-import { cn } from "@/lib/utils/shadcn";
 import { useRouteMetadata } from "@/lib/stores/routeStore";
-import { User } from "../user/user";
-import { AppBreadcrumbs } from "./app-breadcrumbs";
+import { cn } from "@/lib/utils/shadcn";
 import { CommandPalette } from "../command-palette/command-palette";
 import { Notifications } from "../notifications";
+import { User } from "../user/user";
+import { AppBreadcrumbs } from "./app-breadcrumbs";
 
 interface DashboardHeaderProps {
   className?: string;
@@ -35,7 +35,9 @@ export default function AppHeader({ className }: DashboardHeaderProps) {
           <div className="flex gap-2 items-center">
             <Notifications />
           </div>
-          <User user={{ avatar: "", email: "alice@domain.dk", name: "Alice" }} />
+          <User
+            user={{ avatar: "", email: "alice@domain.dk", name: "Alice" }}
+          />
         </div>
       </div>
     </header>

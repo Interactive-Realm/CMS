@@ -14,5 +14,5 @@ export function SettingsTitle({ title, description }: SettingsTitleProps) {
       </div>
       <Separator className="my-4" />
     </>
-  )
+  );
 }

@@ -8,24 +8,24 @@ const BaseCommandSchema = z.object({
 
 export const GotoCommandSchema = BaseCommandSchema.extend({
   type: z.literal("goto"),
-  to: RoutesEnum
+  to: RoutesEnum,
 });
 
 export const CallbackCommandSchema = BaseCommandSchema.extend({
   type: z.literal("callback"),
-  callback: z.function()
+  callback: z.function(),
 });
 
 export const SubMenuCommandSchema = BaseCommandSchema.extend({
   type: z.literal("submenu"),
   message: z.string(),
-  submenu: z.string()
+  submenu: z.string(),
 });
 
 export const CommandSchema = z.discriminatedUnion("type", [
   GotoCommandSchema,
   CallbackCommandSchema,
-  SubMenuCommandSchema
+  SubMenuCommandSchema,
 ]);
 
 export type Command = z.infer<typeof CommandSchema>;

@@ -1,4 +1,8 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/lib/components/ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/lib/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,9 +29,9 @@ import {
   Settings,
   Sparkles,
 } from "lucide-react";
-import { Button } from "../ui/button";
 import { useState } from "react";
 import { SettingsDialog } from "../settings/settings-dialog";
+import { Button } from "../ui/button";
 
 interface UserProps {
   user: {
@@ -68,7 +72,7 @@ export function User({ user, variant = "button" }: UserProps) {
                 <SidebarMenuButton
                   size="lg"
                   className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-                  >
+                >
                   <Avatar className="h-8 w-8">
                     <AvatarImage src={user.avatar} alt={user.name} />
                     <AvatarFallback>
@@ -88,12 +92,14 @@ export function User({ user, variant = "button" }: UserProps) {
               side={isMobile || variant === "button" ? "bottom" : "right"}
               align="end"
               sideOffset={4}
-              >
+            >
               <DropdownMenuLabel className="p-0 font-normal">
                 <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                   <Avatar className="h-8 w-8 rounded-lg">
                     <AvatarImage src={user.avatar} alt={user.name} />
-                    <AvatarFallback className="rounded-lg">{user.name.slice(0, 2).toUpperCase()}</AvatarFallback>
+                    <AvatarFallback className="rounded-lg">
+                      {user.name.slice(0, 2).toUpperCase()}
+                    </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-semibold">{user.name}</span>
@@ -104,7 +110,11 @@ export function User({ user, variant = "button" }: UserProps) {
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
                 <DropdownMenuItem asChild>
-                  <button type="button" className="w-full" onClick={() => setOpenSettings(true)}>
+                  <button
+                    type="button"
+                    className="w-full"
+                    onClick={() => setOpenSettings(true)}
+                  >
                     <Settings />
                     Settings
                   </button>
