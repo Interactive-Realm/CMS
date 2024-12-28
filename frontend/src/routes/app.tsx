@@ -1,5 +1,6 @@
 import { fetchCampaigns } from "@/lib/api/campaigns";
 import DashboardLayout from "@/lib/components/layouts/dashboard";
+import { Toaster } from "@/lib/components/ui/sonner";
 import { useTheme } from "@/lib/components/utils/theme-provider";
 import {
   addCommandsRecord,
@@ -102,6 +103,7 @@ function RouteComponent() {
   return (
     <DashboardLayout>
       <Outlet />
+      <Toaster />
     </DashboardLayout>
   );
 }

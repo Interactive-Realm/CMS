@@ -60,9 +60,6 @@ export function Notifications({ className }: NotificationsProps) {
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 className="flex-col items-start"
-                onClick={() => {
-                  console.log("HEY");
-                }}
               >
                 <p className="font-semibold">{notification.title}</p>
                 <p>{notification.message}</p>

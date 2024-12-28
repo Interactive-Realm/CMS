@@ -39,13 +39,6 @@ export function CommandPalette({ className }: CommandPaletteProps) {
     return () => document.removeEventListener("keydown", down);
   }, []);
 
-  useEffect(() => {
-    console.log({
-      commandMenu,
-      commands,
-    });
-  }, [commandMenu, commands]);
-
   const wrapSetOpen = (value: boolean) => {
     setOpen(value);
 
@@ -94,7 +87,6 @@ export function CommandPalette({ className }: CommandPaletteProps) {
                     command.callback();
                     wrapSetOpen(false);
                   } else if (command.type === "submenu") {
-                    console.log(`Change submenu ${command.submenu}`);
                     setCommandMenu(command.submenu);
                     setCommandMenuPlaceholder(command.message);
                   }
