@@ -8,14 +8,16 @@
     "check": "npx @biomejs/biome check --write src/"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.47.12",
     "dotenv": "^16.4.7",
     "express": "^4.21.2"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.2",
     "tsx": "^4.19.2",
-    "typescript": "~5.6.2",
-    "@biomejs/biome": "1.9.4"
-  }
+    "typescript": "~5.6.2"
+  },
+  "type": "module"
 }
