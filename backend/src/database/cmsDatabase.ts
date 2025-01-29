@@ -39,7 +39,6 @@ const authorization = async (email: string, password: string): Promise<string | 
       return null; // Return null if there's an error or no match
     }
   };
-  
 export { authorization }
 
   

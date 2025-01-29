@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express, { type Express, type Request, type Response } from "express";
-import { authorization } from "./cmsDatabase";
+import { authorization } from "./database/cmsDatabase";
+import { gameData } from "./database/gameDatabase";
 
 dotenv.config();
 
@@ -33,6 +34,23 @@ app.post("/authorize", async (req: Request, res: Response): Promise<void> => {
     }
   } catch (error) {
     console.error("Error in /authorize route:", error);
+    res.status(500).json({ error: "Internal server error." });
+  }
+});
+
+// Route for authorization
+app.post("/data", async (req: Request, res: Response): Promise<void> => {
+
+  try {
+    const engagementData = await gameData();
+    
+    if (engagementData) {
+      res.status(200).json({ engagementData });
+    } else {
+      res.status(401).json({ error: "No data to be send" });
+    }
+  } catch (error) {
+    console.error("Error in /data route:", error);
     res.status(500).json({ error: "Internal server error." });
   }
 });
