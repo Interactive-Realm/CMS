@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import express, { type Express, type Request, type Response } from "express";
 import { authorization } from "./database/cmsDatabase";
 import { gameData } from "./database/gameDatabase";
+import leaderboardRouter from "./routes/leaderboardRouter";
 
 dotenv.config();
 
@@ -14,6 +15,8 @@ app.use(express.json());
 app.get("/", (_req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
 });
+
+const apiRouter = express.Router();
 
 // Route for authorization
 app.post("/authorize", async (req: Request, res: Response): Promise<void> => {
@@ -54,6 +57,11 @@ app.post("/data", async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ error: "Internal server error." });
   }
 });
+
+// Routes
+apiRouter.use("/leaderboard", leaderboardRouter);
+
+app.use("/api", apiRouter);
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
