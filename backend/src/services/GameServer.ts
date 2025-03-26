@@ -1,28 +1,16 @@
+import { User } from "../models/User";
+
 class GameServer {
-    protected gameId: string;
+    protected user: User | null;
 
-    constructor(gameId: string) {
-        this.gameId = gameId;
+    constructor(user: User) {
+        this.user = user;
     }
 
-    public playSessionStart() {
-        // write method
+    public getUser(): User | null {
+        return this.user;
     }
-
-    public playSessionEnd() {
-        // write method
-    }
-
-    public visitStart() {
-        // write method
-    }
-
-    public visitEnd() {
-        // write method
-    }
-
     
-
 }
 
 export default GameServer;

@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import express, { type Express, type Request, type Response } from "express";
 import { authorization } from "./database/cmsDatabase";
 import { gameData } from "./database/gameDatabase";
-import leaderboardRouter from "./routes/leaderboardRouter";
+import raffleRouter from "./routes/raffleRouter";
 
 dotenv.config();
 
@@ -59,7 +59,7 @@ app.post("/data", async (req: Request, res: Response): Promise<void> => {
 });
 
 // Routes
-apiRouter.use("/leaderboard", leaderboardRouter);
+apiRouter.use("/raffle", raffleRouter);
 
 app.use("/api", apiRouter);
 
