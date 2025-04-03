@@ -4,7 +4,7 @@ import { connectDB } from "./config/database";
 import express, { Router, type Express, type Request, type Response } from "express";
 import raffleRouter from "./routes/raffleRouter";
 
-const app = express();
+export const app = express();
 const PORT = config.PORT || 3000;
 
 const apiRouter =  Router();
