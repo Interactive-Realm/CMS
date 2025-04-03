@@ -40,4 +40,21 @@ const gameData = async () => {
   }
 };
 
-export {gameData}
+const connectDB = async (): Promise<boolean> => {
+  try {
+    const { error } = await supabase.from('engagements').select('id').limit(1);
+
+    if (error) {
+      console.error('❌ Supabase connection failed:', error.message);
+      return false;
+    }
+
+    console.log('✅ Supabase (Game DB) connected successfully');
+    return true;
+  } catch (err) {
+    console.error('❌ Unexpected error while connecting to Supabase:', err);
+    return false;
+  }
+};
+
+export { gameData, supabase, connectDB }

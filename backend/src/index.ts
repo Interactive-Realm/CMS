@@ -1,8 +1,9 @@
 import dotenv from "dotenv";
 import express, { type Express, type Request, type Response } from "express";
 import { authorization } from "./database/cmsDatabase";
-import { gameData } from "./database/gameDatabase";
+import { connectDB, gameData } from "./database/gameDatabase";
 import raffleRouter from "./routes/raffleRouter";
+import gameRouter from "./routes/gameRouter";
 
 dotenv.config();
 
@@ -59,10 +60,12 @@ app.post("/data", async (req: Request, res: Response): Promise<void> => {
 });
 
 // Routes
-apiRouter.use("/raffle", raffleRouter);
+apiRouter.use("/game", gameRouter);
+apiRouter.use('/raffle', raffleRouter);
 
 app.use("/api", apiRouter);
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
+  connectDB();
 });
