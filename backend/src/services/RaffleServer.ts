@@ -9,30 +9,36 @@ class RaffleServer extends GameServer {
     super(user);
   }
 
-  public async enterRaffle(): Promise<{ success: boolean; message: string; }> {
-    const { data: existing, error: checkError } = await supabase
-    .from('raffle_table')
-    .select('id')
-    .eq('user_id', this.user.uid)
-    .maybeSingle();
+    public async enterRaffle(): Promise<{ success: boolean; message: string }> {
+      if (!this.user) {
+          throw new Error("No user to register");
+      }
 
-    if (checkError) {
-      return { success: false, message: 'Database error during raffle entry' };
-    }
+      await this.registerUser();
 
-    if (existing) {
-      return { success: false, message: 'User has already entered the raffle'};
-    }
+      const { data: existing, error: checkError } = await supabase
+          .from('raffle_table')
+          .select('id')
+          .eq('user_id', this.user.uid)
+          .maybeSingle();
 
-    const { error: insertError } = await supabase
-    .from('raffle_table')
-    .insert({ user_id: this.user.uid });
+      if (checkError) {
+          return { success: false, message: 'Database error during raffle entry' };
+      }
 
-    if (insertError) {
-      return { success: false, message: 'Database error during raffle entry' };
-    }
+      if (existing) {
+          return { success: false, message: 'User has already entered the raffle' };
+      }
 
-    return { success: true, message: 'Raffle entry submitted' };
+      const { error: insertError } = await supabase
+          .from('raffle_table')
+          .insert({ user_id: this.user.uid });
+
+      if (insertError) {
+          return { success: false, message: 'Database error during raffle entry' };
+      }
+
+      return { success: true, message: 'Raffle entry submitted' };
   }
 }
 

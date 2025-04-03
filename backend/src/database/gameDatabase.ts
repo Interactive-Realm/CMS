@@ -3,7 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 
 dotenv.config();
 
-const supabaseUrl = "https://sdauykhinqbirdyribze.supabase.co";
+const supabaseUrl = process.env.SUPABASE_URL as string;
 const supabaseKey = process.env.SUPABASEGAME_KEY;
 
 if (!supabaseKey) {

@@ -8,7 +8,7 @@ import gameRouter from "./routes/gameRouter";
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
@@ -60,12 +60,17 @@ app.post("/data", async (req: Request, res: Response): Promise<void> => {
 });
 
 // Routes
-apiRouter.use("/game", gameRouter);
 apiRouter.use('/raffle', raffleRouter);
 
 app.use("/api", apiRouter);
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-  connectDB();
-});
+if (process.env.NODE_ENV !== 'test') {
+  connectDB().then(() => {
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT} in ${process.env.NODE_ENV} mode`);
+    });
+  }).catch((err) => {
+    console.error('❌ DB connection failed:', err);
+    process.exit(1);
+  });
+}
