@@ -7,8 +7,9 @@ beforeAll(async () => {
     console.log('🧹 Cleaning up test DB...');
 
     const tablesToClear = [
-        { name: 'users', pk: 'uid' },
-        { name: 'raffle_table', pk: 'id' }
+        { name: 'raffle_table', pk: 'id' },
+        { name: 'engagements', pk: 'id' },
+        { name: 'users', pk: 'uid' }
     ];
 
     for (const { name, pk } of tablesToClear) {

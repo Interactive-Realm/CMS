@@ -1,6 +1,7 @@
 import GameServer from './GameService'
 import { User } from '../models/User';
 import { supabase } from '../config/database';
+import { EngagementServer } from './EngagementService';
 
 class RaffleServer extends GameServer {
     constructor(user: User) {
@@ -39,6 +40,9 @@ class RaffleServer extends GameServer {
         if (insertError) {
             return { success: false, message: 'Database error during insert' };
         }
+
+        const engagement: EngagementServer = new EngagementServer(this.user, 'play');
+        await engagement.logEngagement();
 
         return { success: true, message: 'Raffle entry submitted' };
     }
