@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",                         // Needed for path aliases
+    "baseUrl": ".",                        
     "paths": {
-      "@shared/*": ["shared/src/*"]         // Define the alias
+      "@shared/*": ["shared/src/*"]        
     },
     "target": "ES6",
     "module": "commonjs",
@@ -12,5 +12,8 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "resolveJsonModule": true
-  }
+  },
+  "exclude": [
+    "jest.config.*"
+  ]
 }
