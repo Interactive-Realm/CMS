@@ -4,6 +4,7 @@ import { connectDB } from './config/database';
 import express, { Router } from "express";
 import cors from 'cors';
 import gameRouter from './routes/game.router';
+import engagementRouter from './routes/engagement.router';
 
 export const app = express();
 const PORT = config.PORT;
@@ -18,6 +19,7 @@ app.use('/api', baseRouter);
 
 // Endpoints
 baseRouter.use('/game', gameRouter);
+baseRouter.use('/engagements', engagementRouter);
 
 
 if (process.env.NODE_ENV !== 'test') {

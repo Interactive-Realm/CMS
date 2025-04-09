@@ -15,7 +15,7 @@ describe('Test game service endpoints', () => {
             'email': 'test@user.dk',
             'first_name': 'foo',
         });
-        console.log(response.body);
+        
         expect(response.statusCode).toBe(201);
     });
 });

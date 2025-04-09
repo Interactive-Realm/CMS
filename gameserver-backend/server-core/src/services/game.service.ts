@@ -1,5 +1,6 @@
 import { User } from '../models/User'
 import { supabase } from '../config/database';
+import { Engagement } from '../models/Engagement';
 
 class GameService {
     protected user: User | null;
@@ -35,6 +36,36 @@ class GameService {
         return { OK: true, message: 'Success', user_id: data.uid };
 
     }
+    
+    public async logEngagement(engagement: Engagement): Promise<{ OK: boolean; message: string }> {
+        if (!this.user?.uid) {
+            return { OK: false, message: 'No user ID provided' };
+        }
+
+        const newEngagement: Engagement = {
+            user_id: this.user.uid,
+            eng_type: engagement.eng_type,
+            duration_seconds: engagement.duration_seconds ?? undefined,
+            latitude: engagement.latitude ?? undefined,
+            longitude: engagement.longitude ?? undefined,
+            device_type: engagement.device_type ?? undefined,
+            browser_type: engagement.browser_type ?? undefined,
+            redirect: engagement.redirect ?? undefined
+        }
+
+        const { error } = await supabase
+        .from('engagements')
+        .insert(newEngagement);
+
+        if (error) {
+        console.error('❌ Failed to log engagement:', error.message);
+        return { OK: false, message: 'Failed to log engagement' };
+        }
+
+        return { OK: true, message: 'Engagement logged' };
+
+    }
+    
 }
 
 export default GameService;

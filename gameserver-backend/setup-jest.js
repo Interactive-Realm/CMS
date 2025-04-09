@@ -6,7 +6,7 @@ dotenv.config({ path: './.env.test' });
 beforeAll(async () => {
     console.log('Cleaning up test DB...');
 
-    const tables = ['raffle_table','users'];
+    const tables = ['raffle_table','users', 'engagements'];
   
     for (const table of tables) {
       if (table === 'users') {
