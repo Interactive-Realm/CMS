@@ -33,7 +33,7 @@ dist/
 .vscode/
 .idea/
 
-.performance
+performance
 
 # Output of builds
 build/
@@ -59,12 +59,16 @@ coverage/
 .yarn/install-state.gz
 .pnp.*
 
+
+
 # Temporary
 .DS_Store
 Thumbs.db
 *.swp
 *.swo
 *.bak
+
+performance/
 
 # Ignore all .env files except .env.example
 !.env.example
