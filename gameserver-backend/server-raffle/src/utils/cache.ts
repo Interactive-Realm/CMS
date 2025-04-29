@@ -34,8 +34,17 @@ export async function getCache<T = any>(key: string): Promise<T | null> {
   if (!isProduction || !redis) return null;
 
   try {
-    const result = await redis.get(key);
-    return result ? JSON.parse(result) as T : null;
+    const redisPromise = redis.get(key);
+    console.log(redisPromise)
+
+    const timeoutPromise = new Promise<null>((_, reject) => 
+      setTimeout(() => reject(new Error(`Redis timeout on get ${key}`)), 2000)
+    );
+
+    const result = await Promise.race([redisPromise, timeoutPromise]);
+    console.log(result)
+
+    return result ? JSON.parse(result as string) as T : null;
   } catch (err) {
     console.error(`[cache] Error getting key "${key}":`, err);
     return null;
