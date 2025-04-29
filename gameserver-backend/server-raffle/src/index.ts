@@ -17,8 +17,10 @@ baseRouter.use('/raffle', raffleRouter);
 
 if (process.env.NODE_ENV !== 'test') {
   connectDB().then(() => {
-    app.listen(RAFFLE_PORT, () => {
-      console.log(`🚀 Raffle Server running on port ${RAFFLE_PORT} in ${process.env.NODE_ENV} mode`);
+    const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
+
+    app.listen(RAFFLE_PORT, host, () => {
+      console.log(`🚀 Raffle Server running on ${host}:${RAFFLE_PORT} in ${process.env.NODE_ENV} mode`);
     });
   }).catch((err) => {
     console.error(err);

@@ -24,8 +24,10 @@ baseRouter.use('/engagements', engagementRouter);
 
 if (process.env.NODE_ENV !== 'test') {
   connectDB().then(() => {
-    app.listen(CORE_PORT, () => {
-      console.log(`🚀 Game Core Server running on port ${CORE_PORT} in ${process.env.NODE_ENV} mode`);
+    const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
+
+    app.listen(CORE_PORT, host, () => {
+      console.log(`🚀 Raffle Server running on ${host}:${RAFFLE_PORT} in ${process.env.NODE_ENV} mode`);
     });
   }).catch((err) => {
     console.error(err);

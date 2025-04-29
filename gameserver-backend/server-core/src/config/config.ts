@@ -18,7 +18,7 @@ const config =  {
     PORT: process.env.PORT,
     SUPABASE_KEY: process.env.SUPABASE_KEY,
     SUPABASE_URL: process.env.SUPABASE_URL,
-    CORE_PORT: process.env.CORE_PORT
+    CORE_PORT: Number(process.env.CORE_PORT)
 };
 
 export default config;

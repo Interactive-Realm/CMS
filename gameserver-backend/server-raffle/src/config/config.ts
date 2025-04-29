@@ -12,7 +12,7 @@ const config =  {
     SUPABASE_KEY: process.env.SUPABASE_KEY,
     SUPABASE_URL: process.env.SUPABASE_URL,
     GAME_BASE_URL: process.env.GAME_BASE_URL,
-    RAFFLE_PORT: process.env.RAFFLE_PORT,
+    RAFFLE_PORT: Number(process.env.RAFFLE_PORT),
 };
 
 export default config;
