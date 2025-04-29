@@ -1,5 +1,5 @@
-import { User } from "@shared/models/User";
-import { supabase } from "@shared/supabase/database";
+import { User } from "../models/User";
+import { supabase } from "../config/database";
 import config from "../config/config";
 
 class RaffleService {
