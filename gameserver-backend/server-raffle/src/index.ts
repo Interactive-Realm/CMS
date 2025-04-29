@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 import cors from 'cors';
 import raffleRouter from './routes/raffle.router';
-import { connectDB } from '@shared/supabase/database';
+import { connectDB } from './config/database';
 import config from './config/config';
 
 const RAFFLE_PORT = config.RAFFLE_PORT || 5055;
