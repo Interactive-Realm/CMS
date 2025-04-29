@@ -21,6 +21,9 @@ app.use('/api', baseRouter);
 baseRouter.use('/game', gameRouter);
 baseRouter.use('/engagements', engagementRouter);
 
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
 
 if (process.env.NODE_ENV !== 'test') {
   connectDB().then(() => {

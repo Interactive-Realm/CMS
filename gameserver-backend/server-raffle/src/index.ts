@@ -15,6 +15,10 @@ app.use(cors());
 app.use('/api', baseRouter);
 baseRouter.use('/raffle', raffleRouter);
 
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 if (process.env.NODE_ENV !== 'test') {
   connectDB().then(() => {
     const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';

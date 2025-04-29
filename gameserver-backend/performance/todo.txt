@@ -1,0 +1,39 @@
+TODOs for NFR Evaluation
+
+✅ NFR1: API response time must not exceed 200ms
+- [x] Completed Artillery test with 150 users
+- [x] Measured response times (mean: 86ms, p95: 130ms)
+- [x] Confirmed compliance under test conditions
+
+🔄 NFR2: Caching must reduce backend latency by at least 30%
+- [ ] Implement caching for one API route (e.g., Redis or Supabase edge cache)
+- [ ] Benchmark same route with and without caching
+- [ ] Record average response time before/after
+- [ ] Calculate percentage improvement
+
+🔜 NFR3: System must handle 1000 (or 500) concurrent users without response degradation
+- [ ] Modify Artillery config to simulate 500 concurrent users (sustained or ramped up)
+- [ ] Monitor error rates, response times (especially p95, p99)
+- [ ] Determine if response degradation occurs
+
+🕓 NFR4: Load balancer across 3 active instances
+- [ ] Evaluate if relevant for current scope
+- [ ] (Optional) Deploy clones of API on different ports or containers
+- [ ] Use NGINX or cloud load balancer to route across instances
+- [ ] Test request distribution and uptime under load
+
+⏱ NFR5: Maintain 99.9% uptime over 2 days
+- [ ] Set up uptime monitoring (e.g., UptimeRobot, Healthchecks.io)
+- [ ] Monitor API every 5–10 minutes for at least 48 hours
+- [ ] Record any downtime or HTTP 5xx failures
+
+💾 NFR6: Daily backups retained for 30 days
+- [ ] Confirm if Supabase handles backups (check dashboard retention)
+- [ ] If not, write script to export data and save to cloud/local
+- [ ] Schedule with `cron` or similar tool
+
+🔐 NFR7: GDPR & CCPA compliance
+- [ ] Verify presence of user consent logging
+- [ ] Ensure user data can be exported and deleted on request
+- [ ] Check that no sensitive data is logged without masking/anonymization
+
