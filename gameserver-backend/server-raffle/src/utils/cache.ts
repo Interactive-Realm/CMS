@@ -1,18 +1,53 @@
 import { createClient } from 'redis';
 
-const redis = createClient({
-  url: process.env.REDIS_URL || 'redis://localhost:6379',
-});
+const isProduction = process.env.NODE_ENV === 'production';
 
-redis.connect().catch((err) => {
-  console.error('Redis connection error:', err);
-});
+let redis: ReturnType<typeof createClient> | null = null;
+
+if (isProduction) {
+  console.log('[cache] Initializing Redis client...');
+
+  redis = createClient({
+    url: process.env.REDIS_URL || 'redis://localhost:6379',
+  });
+
+  redis.on('error', (err) => {
+    console.error('[cache] Redis error event:', err);
+  });
+
+  redis.connect()
+    .then(async () => {
+      console.log('[cache] Redis connected');
+      try {
+        const pong = await redis!.ping();
+        console.log('[cache] Redis ping:', pong);
+      } catch (pingErr) {
+        console.error('[cache] Redis ping failed:', pingErr);
+      }
+    })
+    .catch((err) => {
+      console.error('[cache] Redis connection error:', err);
+    });
+}
 
 export async function getCache<T = any>(key: string): Promise<T | null> {
-  const result = await redis.get(key);
-  return result ? JSON.parse(result) as T : null;
+  if (!isProduction || !redis) return null;
+
+  try {
+    const result = await redis.get(key);
+    return result ? JSON.parse(result) as T : null;
+  } catch (err) {
+    console.error(`[cache] Error getting key "${key}":`, err);
+    return null;
+  }
 }
 
 export async function setCache(key: string, value: unknown, ttl = 30): Promise<void> {
-  await redis.set(key, JSON.stringify(value), { EX: ttl });
+  if (!isProduction || !redis) return;
+
+  try {
+    await redis.set(key, JSON.stringify(value), { EX: ttl });
+  } catch (err) {
+    console.error(`[cache] Error setting key "${key}":`, err);
+  }
 }

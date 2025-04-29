@@ -1,15 +1,18 @@
 import dotenv from 'dotenv';
+import path from 'path';
 
-if (process.env.NODE_ENV === 'test') {
-  dotenv.config({ path: `../../.env.test` });
-} else if (process.env.NODE_ENV === 'development') {
-  dotenv.config({ path: `.env.development` });
-} else if (process.env.NODE_ENV === 'production') {
-  dotenv.config({ path: `.env.production` });
-} else {
-  // Default fallback
-  dotenv.config();
-}
+const envFileMap: Record<string, string> = {
+  test: '../../../.env.test',
+  development: '../../.env.development',
+  production: '../../.env.production',
+};
+
+const nodeEnv = process.env.NODE_ENV || 'development';
+const relativeEnvPath = envFileMap[nodeEnv] || '../../.env';
+const envPath = path.resolve(__dirname, relativeEnvPath);
+
+console.log(`[config] Loading environment: ${nodeEnv} from ${envPath}`);
+dotenv.config({ path: envPath });
 
 const config =  {
     NODE_ENV: process.env.NODE_ENV,
