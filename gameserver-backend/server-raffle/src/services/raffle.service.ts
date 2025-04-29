@@ -1,6 +1,7 @@
 import { User } from "../models/User";
 import { supabase } from "../config/database";
 import config from "../config/config";
+import { getCache, setCache } from "../utils/cache";
 
 class RaffleService {
     protected user: User | null;
@@ -10,20 +11,30 @@ class RaffleService {
     }
 
     public async enterRaffle(): Promise<{ success: boolean; message: string }> {
+      const isProduction = process.env.NODE_ENV === 'production';
+    
       if (!this.user) {
         throw new Error('No user to register');
       }
-      
-      const result = await fetch(`${config.GAME_BASE_URL}/api/game/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(this.user)
-      })
-        .then((res) => res.json())
-        .catch(err => console.log(err));
 
-      if (!result || !result.uid) {
-        return { success: false, message: 'Failed to register user' };
+      const cacheKey = `register:${this.user.phone_number}`;
+      let result: any = isProduction ? await getCache(cacheKey) : null;
+      
+      if (!result) {
+        result = await fetch(`${config.GAME_BASE_URL}/api/game/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(this.user)
+        })
+          .then((res) => res.json())
+          .catch(err => {
+            console.error('Fetch error:', err);
+            return null;
+          });
+    
+        if (result && isProduction) {
+          await setCache(cacheKey, result, 30); // cache only if success
+        }
       }
 
       const { data: existing, error: checkError } = await supabase

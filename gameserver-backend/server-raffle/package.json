@@ -15,7 +15,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "redis": "^4.7.0"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
@@ -31,4 +32,3 @@
     "typescript": "^5.8.3"
   }
 }
-
