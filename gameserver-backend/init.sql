@@ -25,7 +25,7 @@ CREATE TYPE engagement_type AS ENUM ('play', 'visit');
 -- Table
 create table public.engagements (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  created_at timestamp with time zone not null default timezone('utc'::text, now()),
+  created_at timestamp with time zone not null default timezone('utc+2'::text, now()),
   duration_seconds integer,
   user_id bigint,
   eng_type engagement_type not null, 

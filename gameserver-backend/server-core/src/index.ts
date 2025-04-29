@@ -7,7 +7,7 @@ import gameRouter from './routes/game.router';
 import engagementRouter from './routes/engagement.router';
 
 export const app = express();
-const PORT = config.PORT;
+const CORE_PORT = config.CORE_PORT;
 
 const baseRouter = Router();
 
@@ -24,8 +24,8 @@ baseRouter.use('/engagements', engagementRouter);
 
 if (process.env.NODE_ENV !== 'test') {
   connectDB().then(() => {
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT} in ${process.env.NODE_ENV} mode`);
+    app.listen(CORE_PORT, () => {
+      console.log(`🚀 Game Core Server running on port ${CORE_PORT} in ${process.env.NODE_ENV} mode`);
     });
   }).catch((err) => {
     console.error(err);

@@ -4,7 +4,7 @@ import raffleRouter from './routes/raffle.router';
 import { connectDB } from '@shared/supabase/database';
 import config from './config/config';
 
-const PORT = config.PORT || 5000;
+const RAFFLE_PORT = config.RAFFLE_PORT || 5055;
 
 export const app = express();
 
@@ -17,8 +17,8 @@ baseRouter.use('/raffle', raffleRouter);
 
 if (process.env.NODE_ENV !== 'test') {
   connectDB().then(() => {
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT} in ${process.env.NODE_ENV} mode`);
+    app.listen(RAFFLE_PORT, () => {
+      console.log(`🚀 Raffle Server running on port ${RAFFLE_PORT} in ${process.env.NODE_ENV} mode`);
     });
   }).catch((err) => {
     console.error(err);
