@@ -27,7 +27,7 @@ if (process.env.NODE_ENV !== 'test') {
     const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
 
     app.listen(CORE_PORT, host, () => {
-      console.log(`🚀 Raffle Server running on ${host}:${RAFFLE_PORT} in ${process.env.NODE_ENV} mode`);
+      console.log(`🚀 Game Server running on ${host}:${CORE_PORT} in ${process.env.NODE_ENV} mode`);
     });
   }).catch((err) => {
     console.error(err);
