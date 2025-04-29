@@ -33,7 +33,7 @@ dist/
 .vscode/
 .idea/
 
-performance
+performance/
 
 # Output of builds
 build/
